@@ -9,7 +9,7 @@ let blogItem = {
         editable: "<"
     },
     templateUrl: 'js/components/blog/blogItem/blogItem.html',
-    controller: ['UsersService', 'PostsService', '$stateParams', '$state', function(UsersService, PostsService, $stateParams, $state) {
+    controller: ['UsersService', 'PostsService', '$stateParams', '$state', function (UsersService, PostsService, $stateParams, $state) {
         'use  strict'
         let initialPost;
 
