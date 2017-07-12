@@ -12,14 +12,31 @@ export default ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($s
       template is ui-view it's used to display nested views
     */
     $stateProvider.state('app', {
-            url: '',
-            abstract: true,
-            template: '<navbar /><div class="container"><ui-view></ui-view></div>'
+        url: '',
+        abstract: true,
+        template: '<navbar /><div class="container"><ui-view></ui-view></div>'
+    })
+        .state('algo1', {
+            url: '/algo1',
+            template: '<div>TEST1 + {{friend}}</div>',
+            //component: 'algo1',
+            controller: ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
+                function friend(tab) {
+                    var newTab = [];
+                    for (let i = 0; i < tab.length; i++) {
+                        if (tab[i].length == 4) {
+                            newTab.push(tab[i])
+                        }
+                    }
+                    return newTab;
+                }
+                $scope.friend = friend(["Ryan", "Kieran", "Mark"]);
+            }]
         })
         .state('callback', {
             url: '/auth/callback/:token',
             template: '',
-            controller: ['UsersService', '$stateParams', '$state', function(UsersService, $stateParams, $state) {
+            controller: ['UsersService', '$stateParams', '$state', function (UsersService, $stateParams, $state) {
                 if ($stateParams.token) {
                     UsersService.setToken($stateParams.token).then((user) => {
                         let toastContent = `Welcome ${user.name} !`
